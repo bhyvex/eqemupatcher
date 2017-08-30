@@ -22,20 +22,20 @@ namespace EQEmu_Patcher
          *  EDIT THESE VARIABLES FOR EACH SERVER
          * 
          ****/
-        public static string serverName = "Rebuild EQ";
-        public static string filelistUrl = "http://rebuildeq.com/patch/";
+        public static string serverName = "Project 2002";
+        public static string filelistUrl = "http://allaclone.p2002.com/patch/";
         public static bool defaultAutoPlay = false; //When a user runs this first time, what should Autoplay be set to?
         public static bool defaultAutoPatch = false; //When a user runs this first time, what should Autopatch be set to?
 
         //Note that for supported versions, the 3 letter suffix is needed on the filelist_###.yml file.
         public static List<VersionTypes> supportedClients = new List<VersionTypes> { //Supported clients for patcher
             //VersionTypes.Unknown, //unk
-            //VersionTypes.Titanium, //tit
+            VersionTypes.Titanium, //tit
             //VersionTypes.Underfoot, //und
             //VersionTypes.Secrets_Of_Feydwer, //sof
             //VersionTypes.Seeds_Of_Destruction, //sod
-            VersionTypes.Rain_Of_Fear, //rof
-            VersionTypes.Rain_Of_Fear_2 //rof
+            //VersionTypes.Rain_Of_Fear, //rof
+            //VersionTypes.Rain_Of_Fear_2 //rof
             //VersionTypes.Broken_Mirror, //bro
         }; 
         //*** END OF EDIT ***
@@ -338,8 +338,8 @@ namespace EQEmu_Patcher
             progressBar.Maximum += getFileCount(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\sounds"));
             progressBar.Maximum += getFileCount(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\SpellEffects"));
             progressBar.Maximum += getFileCount(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\storyline"));
-          //  progressBar.Maximum += getFileCount(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\uifiles"));
-          //  progressBar.Maximum += getFileCount(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\atlas"));
+            progressBar.Maximum += getFileCount(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\uifiles"));
+            progressBar.Maximum += getFileCount(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\atlas"));
             txtList.Text = "Max:" + progressBar.Maximum;
             PatchVersion pv = new PatchVersion();
             pv.ClientVersion = clientVersions[currentVersion].ShortName;
@@ -358,14 +358,12 @@ namespace EQEmu_Patcher
             //Storyline
             fileMap = WalkDirectoryTree(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\storyline"));
             pv.StorylineFiles = fileMap;
-           /*
             //UIFiles
             fileMap = WalkDirectoryTree(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\uifiles"));
             pv.UIFiles = fileMap;
             //Atlas
             fileMap = WalkDirectoryTree(new System.IO.DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\atlas"));
             pv.AtlasFiles = fileMap;
-            */
             //txtList.Text = JsonConvert.SerializeObject(pv);
         }
 
@@ -502,7 +500,7 @@ namespace EQEmu_Patcher
                 }
 
             }
-
+         
             if (filelist.deletes.Count > 0)
             {
                 foreach (var entry in filelist.deletes)
